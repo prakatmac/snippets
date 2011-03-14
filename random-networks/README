@@ -1,0 +1,4 @@
+Mathematica notebooks that generate specific types of random networks.  
+Barabasi-Albert and Watts-Strogatz are two different types of small 
+world networks designed to represent the topologies of some networks
+observed in nature and society.

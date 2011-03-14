@@ -1,0 +1,160 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      5748,        151]
+NotebookOptionsPosition[      5348,        133]
+NotebookOutlinePosition[      5689,        148]
+CellTagsIndexPosition[      5646,        145]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<Combinatorica`\>\"", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.482184101425516*^9, 3.482184134119266*^9}, 
+   3.48218762260231*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"WattsStrogatz", "[", 
+     RowBox[{"Nodes_", ",", " ", "Neighbors_", ",", " ", "Probability_"}], 
+     "]"}], " ", ":=", "\[IndentingNewLine]", 
+    RowBox[{"FromUnorderedPairs", "[", 
+     RowBox[{"Map", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"RandomReal", "[", "]"}], " ", "\[LessEqual]", " ", 
+           "Probability"}], ",", " ", 
+          RowBox[{"RandomChoice", "[", 
+           RowBox[{"Subsets", "[", 
+            RowBox[{
+             RowBox[{"Table", "[", 
+              RowBox[{"v", ",", " ", 
+               RowBox[{"{", 
+                RowBox[{"v", ",", " ", "1", ",", " ", "Nodes"}], "}"}]}], 
+              "]"}], ",", 
+             RowBox[{"{", "2", "}"}]}], "]"}], "]"}], ",", 
+          "\[IndentingNewLine]", " ", "#"}], " ", "]"}], " ", "&"}], ",", " ",
+        "\[IndentingNewLine]", 
+       RowBox[{"ToUnorderedPairs", "[", 
+        RowBox[{"Harary", "[", 
+         RowBox[{"Neighbors", ",", " ", "Nodes"}], "]"}], "]"}]}], 
+      "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}]}], ";"}], 
+  "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.482185915558056*^9, 3.482185968454219*^9}, {
+  3.482186029975122*^9, 3.482186261694325*^9}, {3.4821863916595297`*^9, 
+  3.4821864683996143`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ShowGraph", "[", 
+    RowBox[{"WattsStrogatz", "[", 
+     RowBox[{"Nodes", ",", " ", "Neighbors", ",", " ", "Probability"}], "]"}],
+     "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"Nodes", ",", " ", "5", ",", " ", "100", ",", " ", "1"}], "}"}], 
+   ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"Neighbors", ",", " ", "2", ",", " ", "20", ",", " ", "2"}], 
+    "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"Probability", ",", " ", "0", ",", " ", "1"}], "}"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.482186480230538*^9, 3.482186490547316*^9}, {
+  3.482186527386812*^9, 3.482186562993291*^9}, {3.482186611241105*^9, 
+  3.4821866326874113`*^9}, {3.482186718422449*^9, 3.482186765203063*^9}, {
+  3.482188522411096*^9, 3.482188565484654*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Neighbors$$ = 2, $CellContext`Nodes$$ = 
+    5, $CellContext`Probability$$ = 0, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`Nodes$$], 5, 100, 1}, {
+      Hold[$CellContext`Neighbors$$], 2, 
+      Dynamic[$CellContext`Nodes$$ - 2], 2}, {
+      Hold[$CellContext`Probability$$], 0, 1}}, Typeset`size$$ = {
+    360., {186., 191.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`Nodes$22423$$ = 
+    0, $CellContext`Neighbors$22424$$ = 0, $CellContext`Probability$22425$$ = 
+    0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Neighbors$$ = 2, $CellContext`Nodes$$ = 
+        5, $CellContext`Probability$$ = 0}, "ControllerVariables" :> {
+        Hold[$CellContext`Nodes$$, $CellContext`Nodes$22423$$, 0], 
+        Hold[$CellContext`Neighbors$$, $CellContext`Neighbors$22424$$, 0], 
+        Hold[$CellContext`Probability$$, $CellContext`Probability$22425$$, 
+         0]}, "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Combinatorica`ShowGraph[
+        $CellContext`WattsStrogatz[$CellContext`Nodes$$, \
+$CellContext`Neighbors$$, $CellContext`Probability$$]], 
+      "Specifications" :> {{$CellContext`Nodes$$, 5, 100, 
+         1}, {$CellContext`Neighbors$$, 2, 
+         Dynamic[$CellContext`Nodes$$ - 2], 2}, {$CellContext`Probability$$, 
+         0, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{403., {259.34375, 264.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.482186538897745*^9, 3.482186563938846*^9}, {
+   3.482186754392099*^9, 3.482186767357686*^9}, 3.482188544957494*^9}]
+}, Open  ]]
+},
+WindowSize->{640, 750},
+WindowMargins->{{127, Automatic}, {Automatic, 23}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 188, 4, 27, "Input"],
+Cell[736, 26, 1372, 34, 148, "Input"],
+Cell[CellGroupData[{
+Cell[2133, 64, 808, 19, 43, "Input"],
+Cell[2944, 85, 2388, 45, 541, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

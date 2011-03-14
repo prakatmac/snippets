@@ -1,0 +1,229 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[      9306,        220]
+NotebookOptionsPosition[      8863,        201]
+NotebookOutlinePosition[      9205,        216]
+CellTagsIndexPosition[      9162,        213]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<Combinatorica`\>\"", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.482187611379346*^9, 3.482187619965907*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Evolve", "[", 
+     RowBox[{"g_", ",", " ", "NumConnections_"}], "]"}], " ", ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"NextVertex", " ", "=", " ", 
+         RowBox[{
+          RowBox[{"V", "[", "g", "]"}], " ", "+", " ", "1"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Connections", " ", "=", " ", 
+         RowBox[{"NestWhile", "[", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Union", "[", "\[IndentingNewLine]", 
+             RowBox[{"Append", "[", "\[IndentingNewLine]", 
+              RowBox[{"#", ",", " ", "\[IndentingNewLine]", 
+               RowBox[{"RandomChoice", "[", 
+                RowBox[{
+                 RowBox[{"Degrees", "[", "g", "]"}], " ", "\[Rule]", " ", 
+                 RowBox[{"Table", "[", 
+                  RowBox[{"v", ",", " ", 
+                   RowBox[{"{", 
+                    RowBox[{"v", ",", " ", "1", ",", " ", 
+                    RowBox[{"V", "[", "g", "]"}]}], "}"}]}], "]"}]}], "]"}]}],
+               "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}], 
+            " ", "&"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"List", "[", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Length", "[", "#", "]"}], " ", "<", " ", 
+             RowBox[{"Min", "[", 
+              RowBox[{"NumConnections", ",", " ", 
+               RowBox[{
+                RowBox[{"V", "[", "g", "]"}], " ", "-", " ", 
+                RowBox[{"Length", "[", 
+                 RowBox[{"Select", "[", 
+                  RowBox[{
+                   RowBox[{"Degrees", "[", "g", "]"}], ",", " ", 
+                   RowBox[{
+                    RowBox[{"#", " ", "\[Equal]", " ", "0"}], " ", "&"}]}], 
+                  "]"}], "]"}]}]}], "]"}]}], " ", "&"}]}], 
+          "\[IndentingNewLine]", "]"}]}]}], "\[IndentingNewLine]", "}"}], ",",
+       "\[IndentingNewLine]", 
+      RowBox[{"AddEdges", "[", 
+       RowBox[{
+        RowBox[{"AddVertex", "[", "g", "]"}], ",", " ", 
+        RowBox[{"Map", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"NextVertex", ",", " ", "#"}], "}"}], " ", "&"}], ",", 
+          " ", "Connections"}], "]"}]}], "]"}]}], "\[IndentingNewLine]", 
+     "]"}]}], ";"}], " ", "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.4821889645055227`*^9, 3.482189012805954*^9}, {
+   3.482189097871558*^9, 3.482189168186414*^9}, {3.482189200580818*^9, 
+   3.482189347299704*^9}, {3.482189541597457*^9, 3.48218955226761*^9}, {
+   3.482189627428503*^9, 3.482189656666369*^9}, {3.482189741461389*^9, 
+   3.482189744502097*^9}, {3.4821898874631243`*^9, 3.4821900182418528`*^9}, {
+   3.482190059205765*^9, 3.482190083686056*^9}, {3.482190689973525*^9, 
+   3.482190727505515*^9}, {3.4821908076341743`*^9, 3.482190859627281*^9}, 
+   3.4821909001709623`*^9, {3.482190953219995*^9, 3.482191127903433*^9}, {
+   3.482191186708684*^9, 3.482191229139464*^9}, {3.482191322850337*^9, 
+   3.4821913234677258`*^9}, {3.482191380876062*^9, 3.4821914396664886`*^9}, {
+   3.482191682147504*^9, 3.482191685388217*^9}, {3.482191833891975*^9, 
+   3.4821918685449333`*^9}, {3.482191900187058*^9, 3.48219218088731*^9}, 
+   3.482192239094469*^9, {3.482192379367435*^9, 3.482192379985121*^9}, {
+   3.482192688644034*^9, 3.482192771565371*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"BarabasiAlbert", "[", 
+    RowBox[{
+    "StartingVertices_", ",", " ", "NumConnections_", ",", " ", 
+     "Iterations_"}], "]"}], " ", ":=", "\[IndentingNewLine]", 
+   RowBox[{"Nest", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Evolve", "[", 
+       RowBox[{"#", ",", " ", "NumConnections"}], "]"}], " ", "&"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"CompleteGraph", "[", "StartingVertices", "]"}], ",", 
+     "\[IndentingNewLine]", "Iterations"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.482192845793125*^9, 3.482192850330978*^9}, {
+  3.482192889111157*^9, 3.482193073286384*^9}, {3.482193122804419*^9, 
+  3.4821931378834887`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"ShowGraph", "[", 
+    RowBox[{"CircularEmbedding", "[", 
+     RowBox[{"BarabasiAlbert", "[", 
+      RowBox[{
+      "StartingVertices", ",", " ", "EdgesPerIteration", ",", " ", 
+       "Iterations"}], "]"}], "]"}], "]"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"StartingVertices", ",", " ", "2", ",", "20", ",", " ", "1"}], 
+    "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "EdgesPerIteration", ",", " ", "1", ",", " ", "20", ",", " ", "1"}], 
+    "}"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{"Iterations", ",", " ", "10", ",", "200", ",", "10"}], "}"}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.482191154719777*^9, 3.482191167964513*^9}, {
+  3.4821924822903147`*^9, 3.4821924823398933`*^9}, {3.482192512869738*^9, 
+  3.482192517280785*^9}, {3.482193146301414*^9, 3.482193195337491*^9}, {
+  3.4821932256411333`*^9, 3.482193234678124*^9}, {3.4821935416209784`*^9, 
+  3.482193653562351*^9}, {3.482193692031934*^9, 3.4821937056604433`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`EdgesPerIteration$$ = 
+    1, $CellContext`Iterations$$ = 10, $CellContext`StartingVertices$$ = 2, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`StartingVertices$$], 2, 20, 1}, {
+      Hold[$CellContext`EdgesPerIteration$$], 1, 20, 1}, {
+      Hold[$CellContext`Iterations$$], 10, 200, 10}}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`StartingVertices$301978$$ = 
+    0, $CellContext`EdgesPerIteration$301979$$ = 
+    0, $CellContext`Iterations$301980$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`EdgesPerIteration$$ = 
+        1, $CellContext`Iterations$$ = 10, $CellContext`StartingVertices$$ = 
+        2}, "ControllerVariables" :> {
+        Hold[$CellContext`StartingVertices$$, \
+$CellContext`StartingVertices$301978$$, 0], 
+        Hold[$CellContext`EdgesPerIteration$$, \
+$CellContext`EdgesPerIteration$301979$$, 0], 
+        Hold[$CellContext`Iterations$$, $CellContext`Iterations$301980$$, 0]},
+       "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Combinatorica`ShowGraph[
+        Combinatorica`CircularEmbedding[
+         $CellContext`BarabasiAlbert[$CellContext`StartingVertices$$, \
+$CellContext`EdgesPerIteration$$, $CellContext`Iterations$$]]], 
+      "Specifications" :> {{$CellContext`StartingVertices$$, 2, 20, 
+         1}, {$CellContext`EdgesPerIteration$$, 1, 20, 
+         1}, {$CellContext`Iterations$$, 10, 200, 10}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{403., {264.34375, 269.65625}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.482191168804996*^9, 3.482191235662657*^9, {3.482191330341073*^9, 
+   3.4821913546045218`*^9}, {3.482191431252101*^9, 3.48219146150041*^9}, 
+   3.4821916893721647`*^9, 3.482192208956028*^9, {3.48219243487719*^9, 
+   3.482192513502407*^9}, 3.4821925463168087`*^9, 3.482192776684053*^9, {
+   3.482193181315713*^9, 3.4821931959595833`*^9}, 3.482193235439361*^9, 
+   3.48219365810798*^9, 3.4821937066727543`*^9, {3.482193798882578*^9, 
+   3.482193804482728*^9}}]
+}, Open  ]]
+},
+WindowSize->{640, 750},
+WindowMargins->{{290, Automatic}, {Automatic, 137}},
+FrontEndVersion->"7.0 for Mac OS X x86 (32-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[545, 20, 163, 3, 27, "Input"],
+Cell[711, 25, 3470, 71, 268, "Input"],
+Cell[4184, 98, 701, 17, 73, "Input"],
+Cell[CellGroupData[{
+Cell[4910, 119, 1056, 23, 103, "Input"],
+Cell[5969, 144, 2878, 54, 551, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
