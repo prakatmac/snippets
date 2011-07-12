@@ -24,11 +24,15 @@ if [[ $# > 0 ]]; then
 	fi
 fi
 
-OUTPUT_FILE=$BACKUP_TO/$LABEL-$(date +%Y%m%d).$LEVEL
+if [[ $LEVEL == 1 ]]; then
+	OUTPUT_FILE=$BACKUP_TO/$LABEL-$(date +%Y%m%d).inc
+else
+	OUTPUT_FILE=$BACKUP_TO/$LABEL-$(date +%Y%m%d).full	
+fi
 
-echo $OUTPUT_FILE
+echo "Backing up $BACKUP_MOUNT_POINT ($BACKUP_FROM) to $OUTPUT_FILE"
 
-xfs_freeze -f $BACKUP_MOUNT_POINT
-xfsdump -p $PROGRESS -L $LABEL -M $MEDIA -l -f $OUTPUT_FILE $BACKUP_FROM
-xfs_freeze -u $BACKUP_MOUNT_POINT
-gzip --fast $OUTPUT_FILE
+# xfs_freeze -f $BACKUP_MOUNT_POINT
+# xfsdump -p $PROGRESS -L $LABEL -M $MEDIA -l -f $OUTPUT_FILE $BACKUP_FROM
+# xfs_freeze -u $BACKUP_MOUNT_POINT
+# gzip --fast $OUTPUT_FILE
