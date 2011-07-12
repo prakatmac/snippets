@@ -31,3 +31,4 @@ echo $OUTPUT_FILE
 xfs_freeze -f $BACKUP_MOUNT_POINT
 xfsdump -p $PROGRESS -L $LABEL -M $MEDIA -l -f $OUTPUT_FILE $BACKUP_FROM
 xfs_freeze -u $BACKUP_MOUNT_POINT
+gzip --fast $OUTPUT_FILE
