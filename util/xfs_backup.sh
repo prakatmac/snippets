@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# This script requires: xfsdump and lzop (in addition to standard utilities)
+# in order to be used unmodified.
+
+
 ### Configuration ###
 
 # Label for the backup set
@@ -8,12 +12,15 @@ MEDIA=ext-array
 # Report progress every $PROGRESS seconds
 PROGRESS=60 
 # Filesystem to backup
-BACKUP_FROM=/dev/sda1
-BACKUP_MOUNT_POINT=/data1
+BACKUP_FROM=/data1
 # Location to store backup
 BACKUP_TO=/mnt/backup
 
 ### End Configuration ###
+
+# Find device from mount point
+BACKUP_DEVICE=`mount | grep "$BACKUP_FROM" | awk '{print \$1}'`
+
 
 # Decide on a Full or Incremental Backup
 # ()
@@ -24,15 +31,27 @@ if [[ $# > 0 ]]; then
 	fi
 fi
 
+# don't do full backups every week
+WK=`date +%W`
+ON_WK=`expr $WK % 2`
+
+if [ $ON_WK = 1 ]; then
+    # force incremental
+    LEVEL=1
+fi
+
 if [[ $LEVEL == 1 ]]; then
 	OUTPUT_FILE=$BACKUP_TO/$LABEL-$(date +%Y%m%d).inc
 else
 	OUTPUT_FILE=$BACKUP_TO/$LABEL-$(date +%Y%m%d).full	
 fi
 
-echo "Backing up $BACKUP_MOUNT_POINT ($BACKUP_FROM) to $OUTPUT_FILE"
+echo "Backing up $BACKUP_FROM ($BACKUP_DEVICE) to $OUTPUT_FILE"
 
-# xfs_freeze -f $BACKUP_MOUNT_POINT
-# xfsdump -p $PROGRESS -L $LABEL -M $MEDIA -l -f $OUTPUT_FILE $BACKUP_FROM
-# xfs_freeze -u $BACKUP_MOUNT_POINT
+# /usr/sbin/xfs_freeze -f $BACKUP_FROM
+echo xfsdump -p $PROGRESS -L $LABEL -M $MEDIA -l $LEVEL -f $OUTPUT_FILE $BACKUP_DEVICE
+/usr/sbin/xfsdump -p $PROGRESS -L $LABEL -M $MEDIA -l $LEVEL -f $OUTPUT_FILE $BACKUP_DEVICE
+# /usr/sbin/xfs_freeze -u $BACKUP_FROM
+# Use LZO compression instead of gzip for speed
+/usr/bin/lzop -U --path=$BACKUP_TO $OUTPUT_FILE
 # gzip --fast $OUTPUT_FILE
