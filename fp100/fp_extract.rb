@@ -37,7 +37,8 @@ html << %Q{
 <head>
   <title>The FP Top 100 Global Thinkers - Full Annotated List</title>
 </head>
-<body width="625">
+<body>
+  <div style="width:650px">
 }
 
 index = 0; last_url = ""
@@ -69,6 +70,7 @@ thinkers.each do |thinker|
 end
 
 html << %Q{
+  </div>
 </body>
 </html>
 }
