@@ -13,7 +13,7 @@ classdef TiffSeries < handle
     methods
         function obj = TiffSeries(filename)
             if(exist(filename, 'file'))
-                [p f e v] = fileparts(filename); %#ok<NASGU>
+                [p f e] = fileparts(filename); %#ok<NASGU>
                 if(regexpi(e, '^\.tif{1,2}$'))
                     obj.Basename = [f e];
                     obj.Path = p;
@@ -70,21 +70,22 @@ classdef TiffSeries < handle
 
             tmp = obj.vFileList;
             for i = 1:numel(tmp)
-                if
+                
             end
             match = sort(tmp);
         end
     end
     
-    
-    function [pz pc pt] = makepatterns(filename)
-        [p f e v] = fileparts(filename);
-        pz = fullfile(p, ...
-            regexprep([f e], '(z)\d+', '$1%[0123456789]+', 'ignorecase'));
-        pc = fullfile(p, ...
-            regexprep([f e], '(c)\d+', '$1%[0123456789]+', 'ignorecase'));
-        pt = fullfile(p, ...
-            regexprep([f e], '(t)\d+', '$1%[0123456789]+', 'ignorecase'));
+    methods(Access = protected)
+        function [pz pc pt] = makepatterns(filename)
+            [p f e] = fileparts(filename);
+            pz = fullfile(p, ...
+                regexprep([f e], '(z)\d+', '$1%[0123456789]+', 'ignorecase'));
+            pc = fullfile(p, ...
+                regexprep([f e], '(c)\d+', '$1%[0123456789]+', 'ignorecase'));
+            pt = fullfile(p, ...
+                regexprep([f e], '(t)\d+', '$1%[0123456789]+', 'ignorecase'));
+        end
     end
 end
 
