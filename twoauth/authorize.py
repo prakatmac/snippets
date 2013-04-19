@@ -11,8 +11,9 @@ import argparse
 import base64
 from urllib import quote_plus as quote
 import urllib2
-
 import json
+
+from urllib2_ext import VerifiedHTTPSHandler
 
 ENDPOINT = 'https://api.twitter.com/oauth2/token'
 
@@ -32,7 +33,7 @@ def authorize(key, secret):
     """
     req = build_request(build_credentials(key, secret))
     try:
-        resp = urllib2.urlopen(req)
+        resp = urllib2.build_opener(VerifiedHTTPSHandler()).open(req)
         out = json.load(resp)
         resp.close()
         return {'Authorization': 'Bearer ' + out[u'access_token']}
