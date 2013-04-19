@@ -1,4 +1,11 @@
 #!/usr/bin/python
+"""
+authorize - Twitter OAuth2 API Tools
+
+This module facilitates Twitter API authentication and authorization using its
+OAuth2 API which is relatively new (enabled 3/11/2013 as far as I know and only
+for application-only authorization).
+"""
 
 import argparse
 import base64
@@ -36,6 +43,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-k', '--key', help='Consumer Key')
     parser.add_argument('-s', '--secret', help='Consumer Secret')
+    parser.add_argument('-o', '--output', help='Save JSON serialized header')
     
     args = parser.parse_args()
 
@@ -44,6 +52,10 @@ if __name__ == '__main__':
     if args.secret == None:
         args.secret = raw_input('Consumer Secret: ')
     
-    print(authorize(args.key, args.secret))    
+    if args.output == None:
+        print(json.dumps(authorize(args.key, args.secret)))
+    else:
+        with open(args.output, 'w') as file:
+            json.dump(authorize(args.key, args.secret), file)
         
     
