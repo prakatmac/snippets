@@ -22,6 +22,7 @@ class VerifiedHTTPSConnection(httplib.HTTPSConnection):
         certfile = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cacert.pem')
         print certfile
         self.sock = ssl.wrap_socket(sock, self.key_file, self.cert_file, cert_reqs=ssl.CERT_REQUIRED, ca_certs=certfile)
+
 # wraps https connections with ssl certificate verification
 class VerifiedHTTPSHandler(urllib2.HTTPSHandler):
     def __init__(self, connection_class = VerifiedHTTPSConnection):

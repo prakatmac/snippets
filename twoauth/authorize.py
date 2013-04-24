@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python2.7
 """
 authorize - Twitter OAuth2 API Tools
 
