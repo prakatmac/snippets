@@ -13,7 +13,7 @@ from urllib import quote_plus as quote
 import urllib2
 import json
 
-from urllib2_ext import VerifiedHTTPSHandler
+from ext.urllib2_ext import VerifiedHTTPSHandler
 
 ENDPOINT = 'https://api.twitter.com/oauth2/token'
 

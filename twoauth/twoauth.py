@@ -6,7 +6,7 @@ from urllib import urlencode
 import argparse
 import json
 
-from urllib2_ext import VerifiedHTTPSHandler
+from ext.urllib2_ext import VerifiedHTTPSHandler
 
 GZIP_HEADER = {'Accept-Encoding': 'gzip'}
 

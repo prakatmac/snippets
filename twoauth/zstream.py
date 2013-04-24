@@ -16,7 +16,7 @@ import msgpack
 import oauth2 as oauth
 from tweetstream import ConnectionError, AuthenticationError
 
-from tweetstream_ext import OAuthSampleStream
+from ext.tweetstream_ext import OAuthSampleStream
 
 def process_tweet(tweet, stream=None):
 	logger.debug(tweet)
